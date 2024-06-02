@@ -29,6 +29,17 @@ Install the package requirements using:
 pip install -r requirements.txt
 ```
 
+Next, you need to setup a Spotify developer account to be able to get the current song information.
+
+1. Head to https://developer.spotify.com/dashboard
+2. Create a new app (https://developer.spotify.com/documentation/web-api/tutorials/getting-started#create-an-app)
+3. Set the callback URL to `http://localhost:8888/callback`
+4. Create a file called `.env`
+5. Put your client_id in the first line
+6. Put your client_secret in the second line
+
+You should be all ready to go now!
+
 Once pip has finished installing all the required packages, run server.py using:
 
 ```bash
