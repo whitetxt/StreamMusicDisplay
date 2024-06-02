@@ -1,0 +1,130 @@
+#icon_wrap {
+    display: grid;
+    place-items: center;
+    position: relative;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    grid-area: i;
+    z-index: 99;
+    box-shadow: 8px 0px 8px #85deb6;
+    background-color: #85deb6;
+}
+
+#icon,
+#loader {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+#icon {
+    position: relative;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#loader {
+    position: relative;
+    margin: auto;
+}
+
+#title {
+    position: relative;
+    grid-area: t;
+    align-self: end;
+    padding-right: 16px;
+    width: fit-content;
+
+    font-size: 28px;
+    color: #da07ff;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow-x: visible;
+    overflow: hidden;
+}
+
+#artist {
+    position: relative;
+    grid-area: a;
+    align-self: start;
+    padding-right: 16px;
+    width: fit-content;
+
+    font-size: 20px;
+    color: #8205b3;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+#shadow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 999;
+    background: linear-gradient(to right, transparent 90%, #85deb6 100%);
+}
+
+body {
+    width: 2000px;
+    height: 94px;
+    margin: 0;
+    padding: 0;
+
+    display: grid;
+    gap: 8px;
+    grid-template-areas:
+        "i t"
+        "i a";
+    align-items: center;
+    justify-content: start;
+
+    overflow: hidden;
+    background-color: #85deb6;
+    color: black;
+    font-family: "Rampart One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.left {
+    left: -110%;
+}
+
+.up {
+    top: -110%;
+}
+
+.scroll {
+    animation: 20s linear 1s infinite alternate scroll;
+}
+
+@keyframes scroll {
+    0% {
+        left: 0;
+    }
+
+    5% {
+        left: 0;
+    }
+
+    95% {
+        left: var(--w);
+    }
+
+    100% {
+        left: var(--w);
+    }
+}

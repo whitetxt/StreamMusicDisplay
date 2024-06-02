@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stream Music Display</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="icon_wrap">
+        <img src="spin.svg" alt="" id="loader" class="hidden">
+        <img src="" alt="" id="icon" class="hidden">
+    </div>
+    <span id="title"></span>
+    <span id="artist"></span>
+    <div id="shadow"></div>
+</body>
+
+<script>
+    const title = document.getElementById('title');
+    const artist = document.getElementById('artist');
+    const icon = document.getElementById('icon');
+    const icon_wrap = document.getElementById('icon_wrap');
+    const loader = document.getElementById('loader');
+
+    function connect() {
+        socket = new WebSocket('ws://localhost:5678');
+        socket.onmessage = onmessage;
+        socket.onclose = function (event) {
+            console.log('Connection closed');
+            setTimeout(() => {
+                connect();
+            }, 1000);
+        }
+    }
+    function onmessage() {
+        const data = JSON.parse(event.data);
+        console.log(data);
+        title.animate([{
+            left: 0
+        }, {
+            left: "-110%"
+        }], {
+            duration: 500,
+            easing: "ease-in"
+        });
+        artist.animate([{
+            left: 0
+        }, {
+            left: "-110%"
+        }], {
+            duration: 500,
+            delay: 100,
+            easing: "ease-in"
+        });
+        setTimeout(() => {
+            title.classList.add("left");
+            artist.classList.add("left");
+        }, 300);
+        icon_wrap.animate([{
+            top: 0
+        }, {
+            top: "-110%"
+        }], {
+            duration: 500,
+            delay: 600,
+            easing: "ease-in"
+        });
+        setTimeout(() => {
+            icon_wrap.classList.add("up");
+        }, 1000);
+        icon_wrap.animate([{
+            top: "-110%"
+        }, {
+            top: 0
+        }], {
+            duration: 500,
+            delay: 1200,
+            easing: "ease-out"
+        });
+        setTimeout(() => {
+            icon_wrap.classList.remove("up");
+        }, 1400);
+        title.animate([{
+            left: "-110%"
+        }, {
+            left: 0
+        }], {
+            duration: 500,
+            delay: 1700,
+            easing: "ease-out"
+        });
+        artist.animate([{
+            left: "-110%"
+        }, {
+            left: 0
+        }], {
+            duration: 500,
+            delay: 1800,
+            easing: "ease-out"
+        });
+        setTimeout(() => {
+            title.classList.remove("left");
+            artist.classList.remove("left");
+        }, 1900);
+        setTimeout(() => {
+            title.classList.add("hidden");
+            artist.classList.add("hidden");
+            title.classList.remove("scroll");
+            artist.classList.remove("scroll");
+        }, 600);
+        setTimeout(() => {
+            if (title.innerText == "") {
+                icon.classList.remove("hidden");
+                loader.classList.remove("hidden");
+            }
+            title.innerText = data.title;
+            artist.innerText = data.artist;
+            icon.src = data.icon;
+        }, 1100);
+        setTimeout(() => {
+            title.classList.remove("hidden");
+            artist.classList.remove("hidden");
+            if (title.clientWidth > 290) {
+                title.classList.add("scroll");
+                title.style.setProperty("--w", `${-title.clientWidth + 290}px`);
+            }
+            if (artist.clientWidth > 290) {
+                artist.classList.add("scroll");
+                artist.style.setProperty("--w", `${-artist.clientWidth + 290}px`);
+            }
+        }, 1600);
+    }
+    connect();
+</script>
+
+</html>
