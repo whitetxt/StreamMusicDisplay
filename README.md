@@ -15,13 +15,13 @@ A simple way to display the current Spotify song on your stream!
 
 ### Requirements
 
-1. Python > 3.7, < 3.12
+1. Python 3.8, 3.9, 3.10 or 3.11
 2. websockets
 3. spotipy
 
 ### Installation Instructions
 
-Ensure that a version of Python later than 3.7 and before 3.12 is installed.
+Ensure that a valid version of Python is installed.
 
 Install the package requirements using:
 
