@@ -12,7 +12,8 @@ with open(".env") as f:
     lines = f.readlines()
     client_id = lines[0].strip()
     client_secret = lines[1].strip()
-    redirect_uri = lines[2].strip()
+
+redirect_uri = "http://localhost:8888/callback"
 
 sp = spotipy.Spotify(
     auth_manager=SpotifyOAuth(
