@@ -36,6 +36,8 @@ jobs_lock = Lock()
 
 def get_playing():
     results = sp.currently_playing("GB")
+    if results is None:
+        return "No song playing", "", ""
     name = results["item"]["name"]
     artist = ", ".join(x["name"] for x in results["item"]["artists"])
     icon = results["item"]["album"]["images"][0]["url"]
